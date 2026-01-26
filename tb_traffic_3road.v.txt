@@ -1,0 +1,64 @@
+TESTBENCH,,,,,,
+
+module tb_traffic_3road;
+
+    // Testbench signals
+    reg clk;
+    reg reset;
+    reg emergency;
+    reg ped_req;
+
+    wire [2:0] lightA;
+    wire [2:0] lightB;
+    wire [2:0] lightC;
+    wire ped_signal;
+
+
+    traffic_3road DUT (
+        .clk(clk),
+        .reset(reset),
+        .emergency(emergency),
+        .ped_req(ped_req),
+        .lightA(lightA),
+        .lightB(lightB),
+        .lightC(lightC),
+        .ped_signal(ped_signal)
+    );
+
+    // Clock generation (10 time units period)
+    always #5 clk = ~clk;
+
+    // Dumpfile and dumpvars (for waveform)
+    initial begin
+        $dumpfile("traffic_3road.vcd");
+        $dumpvars(0, tb_traffic_3road);
+    end
+
+    // Test sequence
+    initial begin
+        clk = 0;
+        reset = 1;
+        emergency = 0;
+        ped_req = 0;
+
+        #10 reset = 0;
+
+        // Normal operation
+        #200;
+
+        // Pedestrian request
+        ped_req = 1;
+        #10 ped_req = 0;
+
+        #150;
+
+        // Emergency override
+        emergency = 1;
+        #30 emergency = 0;
+
+        #150;
+
+        $stop;
+    end
+
+endmodule
