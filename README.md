@@ -16,6 +16,10 @@ Features
 - RTL to Physical Layout flow
 
 
+simulation result : 
+
+![Simulation Waveform](images/simulation_waveform.png)
+
 
  System Architecture
 The system is designed using FSM concepts (Moore/Mealy model) with defined states such as:
