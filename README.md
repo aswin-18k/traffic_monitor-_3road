@@ -17,8 +17,7 @@ Features
 
 
 simulation result : 
-
-![Simulation Waveform](images/finalsimulation.jpeg)
+![Simulation Waveform](images/simulation_waveform.png)
 
 
  System Architecture
